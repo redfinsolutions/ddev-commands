@@ -1,0 +1,81 @@
+#!/bin/bash
+
+## #ddev generated
+
+## Description: Enable or disable caching
+## Usage: ctoggle on|off|enable|disable|true|false
+## Example: ddev ctoggle (default is "on")\nddev ctoggle off\nddev ctoggle on <site> - for multisite, specify the folder
+## ProjectTypes: drupal8,drupal9,drupal10,drupal
+
+# define configuration
+local_settings="settings.personal.php"
+site=${2:-"default"}
+token="#caching#"
+
+# DDEV will always start you in /var/www/html in container commands.
+cd "web/sites" || exit 3
+
+# Enables caching by adding a container yaml that points to a service
+# that has caching on. If the line is already there, avoids adding
+# it twice.
+disable_caching() {
+    cd "$site" || exit 1
+    # Create the personal settings file if it doesn't exist.
+    if [ ! -f $local_settings ]; then
+        printf "<?php\n" > $local_settings
+    fi
+
+    if grep -qi "$token" $local_settings; then 
+        echo "Caching was already off."; 
+    else 
+        echo "\$config['system.performance']['css']['preprocess'] = FALSE; $token" >> $local_settings
+        echo "\$config['system.performance']['js']['preprocess'] = FALSE; $token" >> $local_settings
+        echo "\$settings['cache']['bins']['render'] = 'cache.backend.null'; $token" >> $local_settings
+        echo "\$settings['cache']['bins']['page'] = 'cache.backend.null'; $token" >> $local_settings
+        echo "\$settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.null'; $token" >> $local_settings
+        echo -e "\e[32mCaching disabled.\e[0m"
+        cd "/var/www/html/$DDEV_DOCROOT" || exit 5
+        if [ "$site" != "default" ]; then 
+            drush "@$site.local" cr 
+        else
+            drush cr
+        fi
+    fi
+}
+
+# Disables caching by removing the line that points to the container
+# yaml. It does this by searching for a token that's appended as a comment.
+enable_caching() {
+    cd "$site" || exit 1
+    # Create the personal settings file if it doesn't exist.
+    if [ ! -f $local_settings ]; then
+        printf "<?php\n" > $local_settings
+    fi
+
+    # Remove the line that contains the token if you are turning off.
+    sed -i -e "/$token/d" $local_settings || exit 4
+    echo -e "\e[32mCaching enabled.\e[0m"
+    cd "/var/www/html/$DDEV_DOCROOT" || exit 5
+    if [ "$site" != "default" ]; then 
+        drush "@$site.local" cr
+    else
+        drush cr
+    fi
+}
+
+# Assume that they want the 'default' site folder if they have not specified.
+if [ $# -eq 0 ] ; then
+  enable_caching "$site"
+  exit
+fi
+
+case $1 in
+    on|true|enable)
+	enable_caching "$site"
+	;;
+	off|false|disable)
+	disable_caching "$site"
+	;;
+	*)
+        echo "Please enter a valid argument."
+esac

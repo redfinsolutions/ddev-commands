@@ -1,0 +1,6 @@
+#!/bin/bash
+
+## #ddev generated
+
+newPath=${PWD/$DDEV_APPROOT/\/var\/www\/html}
+ddev exec -d $newPath $@

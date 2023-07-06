@@ -1,0 +1,10 @@
+#!/bin/bash
+
+## #ddev generated
+
+if [[ -f /var/www/html/Makefile ]]
+then
+    cd /var/www/html && make $@
+else
+    cd /var/www/html/$DDEV_DOCROOT && make $@
+fi

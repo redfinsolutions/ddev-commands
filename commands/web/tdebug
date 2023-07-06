@@ -1,0 +1,63 @@
+#!/bin/bash
+
+## Description: Enable or disable Twig debugging
+## Usage: tdebug on|off|enable|disable|true|false
+## Example: "ddev tdebug" (default is "on"), "ddev tdebug off", "ddev tdebug on"
+
+cd $DDEV_APPROOT/web/sites
+settings="twigdebug.development.services.yml"
+local_settings="settings.local.php"
+touch twigdebug.development.services.yml
+printf "twig.config:\n  debug: true\n" > twigdebug.development.services.yml
+
+edit_settings_on() {
+    if [ -f $local_settings ]; then
+        echo "\$settings['container_yamls'][] = DRUPAL_ROOT . '/sites/twigdebug.development.services.yml'; #twigdebug#" > $local_settings
+    fi
+}
+
+edit_settings_off() {
+    if [ -f $local_settings ]; then
+         sed -i -e "/#twigdebug#/d" $local_settings
+    fi
+}
+
+enable_tdebug() {
+    cd $DDEV_APPROOT/web/sites/default
+    if [ -f $local_settings ]; then
+        edit_settings_on
+    else
+        cd ..
+        cat example.settings.local.php > settings.local.php
+        edit_settings_on
+        mv settings.local.php default
+    fi
+    echo "Twig debugging enabled."
+}
+
+disable_tdebug() {
+    cd $DDEV_APPROOT/web/sites/default
+    if [ -f $local_settings ]; then
+        edit_settings_off
+    else
+        echo "No local settings file found."
+    fi
+    echo "Twig debugging disabled."
+}
+
+if [ $# -eq 0 ] ; then
+  enable_tdebug
+  exit
+fi
+
+case $1 in
+    on|true|enable)
+	enable_tdebug
+	;;
+	off|false|disable)
+	disable_tdebug
+	;;
+	*)
+        echo "Please enter a valid argument."
+
+esac

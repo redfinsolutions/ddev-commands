@@ -1,8 +1,8 @@
 #ddev-generated
-# Simple template to demonstrate addon-template
+# Simple template to demonstrate drupal-rfs-custom-commands
 services:
-  addon-template:
-    container_name: ddev-${DDEV_SITENAME}-addon-template
+  drupal-rfs-custom-commands:
+    container_name: ddev-${DDEV_SITENAME}-drupal-rfs-custom-commands
     image: busybox:stable
     command: tail -f /dev/null
     networks: [default, ddev_default]

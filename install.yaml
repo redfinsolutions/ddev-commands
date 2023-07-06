@@ -1,4 +1,4 @@
-name: addon-template
+name: drupal-rfs-custom-commands
 
 # pre_install_actions - list of actions to run before installing the addon.
 # Examples would be removing an extraneous docker volume,
@@ -56,7 +56,8 @@ pre_install_actions:
 # if it hasn't been modified by the user.
 # DDEV environment variables can be interpolated into these filenames
 project_files:
-- docker-compose.addon-template.yaml
+- docker-compose.drupal-rfs-custom-commands.yaml
+- commands/
 # - extra_files/
 # - somefile.sh
 
@@ -70,7 +71,7 @@ global_files:
 post_install_actions:
 # - chmod +x ~/.ddev/commands/web/somecommand
 # - touch somefile.${GOOS}.${DDEV_WEBSERVER}
-# - perl -pi -e 's/oldstring/newstring/g' docker-compose.addon-template.yaml
+# - perl -pi -e 's/oldstring/newstring/g' docker-compose.drupal-rfs-custom-commands.yaml
 
 # Advanced usage - yaml files can be read in and then used as go template actions
 # in pre_install_actions and post_install_actions
