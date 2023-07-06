@@ -15,8 +15,8 @@ In DDEV addons can be installed from the command line using the `ddev get` comma
 
 * A web command [ctoggle](commands/web/ctoggle) that will enable or disable caching.
 * A web command [tdebug](commands/web/tdebug) that will enable or disable Twig debugging.
-* A web command [make](commands/web/make) that...
-* A host command [x](commands/host/x) that... 
+* A web command [make](commands/web/make) that runs a `make` command inside DDEV.
+* A host command [x](commands/host/x) to execute any command inside DDEV.
 * A [docker-compose.drupal-rfs-custom-commands.yaml](docker-compose.drupal-rfs-custom-commands.yaml) file.
 * An [install.yaml](install.yaml) file that describes how to install the service or other component.
 * A test suite in [test.bats](tests/test.bats) that makes sure the service continues to work as expected.
