@@ -1,0 +1,7 @@
+## Description: Run PHPUnit tests inside the web container.
+## Usage: phpunit
+## Example: "ddev phpunit" or with additional arguments such as "ddev phpunit --help"
+#!/usr/bin/env bash
+
+echo 'Running PHPUnit...'
+vendor/bin/phpunit $*
