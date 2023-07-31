@@ -1,5 +1,7 @@
 #!/bin/bash
 
+## #ddev generated
+
 ## Description: Enable or disable Twig debugging
 ## Usage: tdebug on|off|enable|disable|true|false
 ## Example: "ddev tdebug" (default is "on"), "ddev tdebug off", "ddev tdebug on"

@@ -1,27 +1,23 @@
-[![tests](https://github.com/ddev/drupal-rfs-custom-commands/actions/workflows/tests.yml/badge.svg)](https://github.com/ddev/drupal-rfs-custom-commands/actions/workflows/tests.yml) ![project is maintained](https://img.shields.io/maintenance/yes/2024.svg)
+![project is maintained](https://img.shields.io/maintenance/yes/2024.svg)
 
-# drupal-rfs-custom-commands <!-- omit in toc -->
+# Redfin Solutions Drupal Commands <!-- omit in toc -->
 
-* [What is drupal-rfs-custom-commands?](#what-is-drupal-rfs-custom-commands)
-* [Components of the repository](#components-of-the-repository)
+## What is it?
 
-## What is drupal-rfs-custom-commands?
+A package of helper commands for `ddev` commonly used when developing Drupal websites.
 
-The addon 'drupal-rfs-custom-commands' was developed to offer DDEV command shortcuts for common actions working with Drupal sites, like enabling/disabling Twig debugging or caching. 
+## How to install?
+DDEV addons can be installed from the command line using the `ddev get` command. For this addon, run `ddev get redfinsolutions/ddev-commands` .
 
-In DDEV addons can be installed from the command line using the `ddev get` command, for example, `ddev get ddev/drupal-rfs-custom-commands` or `ddev get ddev/ddev-drupal9-solr`.
-
-## Components of the repository
+## Available commands
 
 * A web command [ctoggle](commands/web/ctoggle) that will enable or disable caching.
 * A web command [tdebug](commands/web/tdebug) that will enable or disable Twig debugging.
 * A web command [make](commands/web/make) that runs a `make` command inside DDEV.
+* A web command [phpunit](commands/web/phpunit) that runs a `make` command inside DDEV.
+* A host command [login](commands/host/login) to open a browser to a Drupal site with an admin login.
+* A host command [stop-other](commands/host/stop-other) to stop all other running DDEV projects.
 * A host command [x](commands/host/x) to execute any command inside DDEV.
-* A [docker-compose.drupal-rfs-custom-commands.yaml](docker-compose.drupal-rfs-custom-commands.yaml) file.
-* An [install.yaml](install.yaml) file that describes how to install the service or other component.
-* A test suite in [test.bats](tests/test.bats) that makes sure the service continues to work as expected.
-* [Github actions setup](.github/workflows/tests.yml) so that the tests run automatically when you push to the repository.
 
-**Contributed and maintained by [@CONTRIBUTOR](https://github.com/CONTRIBUTOR) based on the original [ddev-contrib recipe](https://github.com/ddev/ddev-contrib/tree/master/docker-compose-services/RECIPE) by [@CONTRIBUTOR](https://github.com/CONTRIBUTOR)**
 
-**Originally Contributed by [somebody](https://github.com/somebody) in <https://github.com/ddev/ddev-contrib/>
+**Based on the original [ddev-contrib recipe](https://github.com/ddev/ddev-contrib/tree/master/docker-compose-services/RECIPE) by [@CONTRIBUTOR](https://github.com/CONTRIBUTOR)**

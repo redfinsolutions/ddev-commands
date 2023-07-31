@@ -1,5 +1,7 @@
 #!/bin/bash
 
+## #ddev generated
+
 ## Description: Launch a browser and login to the current Drupal project.
 ## Usage: login [--name=USER]
 ## Example: "ddev login" or "ddev login --name=username" or "ddev login --uid=1"

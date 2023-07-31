@@ -1,5 +1,7 @@
 #!/bin/bash
 
+## #ddev generated
+
 ## Description: Stop all other running projects
 ## Usage: stop-other
 ## Example: "ddev stop-other"
