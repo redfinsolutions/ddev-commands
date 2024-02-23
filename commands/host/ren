@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+composer require drupal/$1 && drush en $1 -y
